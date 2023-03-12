@@ -10,7 +10,6 @@ import { useCheckIfAuthenticated } from '../modules/auth/hooks'
 
 const PrivateRoutes = () => {
   const [isAppLoaded] = useCheckIfAuthenticated()
-  console.log(isAppLoaded)
   return !isAppLoaded ? (
     <div className='flex items-center justify-center w-screen h-screen'>
       <Spinner

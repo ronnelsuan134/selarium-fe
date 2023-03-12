@@ -9,7 +9,6 @@ import {
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
 import api from '../../common/api'
-import { AuthenticatedContext } from '../../common/context'
 
 const initLoginForm = {
   email: '',
