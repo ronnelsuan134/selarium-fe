@@ -14,8 +14,7 @@ import {
   useToast,
   Select
 } from '@chakra-ui/react'
-import api from '../../Api'
-import { AuthenticatedContext } from '../../Api/context'
+import api from '../../common/api'
 
 const initUserTransfer = {
   email: '',
@@ -36,13 +35,8 @@ const BankTransfer = () => {
   const [bankTransfer, setBankTransfer] = useState(initBankTransfer)
   const [banks, setBanks] = useState(null)
   const toast = useToast()
-  const isAuth = useContext(AuthenticatedContext)
 
-  useEffect(() => {
-    if (!isAuth.isAuthenticated) {
-      navigate('/login')
-    }
-  }, [])
+  useEffect(() => {}, [])
 
   const onChangeUserTransferForm = e =>
     setUserTransfer(prevState => ({
@@ -84,7 +78,7 @@ const BankTransfer = () => {
       }, 2000)
       setErrors(null)
     } catch (e) {
-      if (e.response.status === 422) {
+      if ([400, 422].includes(e.response.status)) {
         setErrors(e.response.data.errors)
       }
     }
@@ -106,11 +100,7 @@ const BankTransfer = () => {
       }, 2000)
       setBankErrors(null)
     } catch (e) {
-      if (e.response.status === 422) {
-        setBankErrors(e.response.data.errors)
-      }
-
-      if (e.response.status === 400) {
+      if ([400, 422].includes(e.response.status)) {
         setBankErrors(e.response.data.errors)
       }
     }

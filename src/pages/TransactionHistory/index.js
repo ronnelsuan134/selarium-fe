@@ -1,9 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AuthenticatedContext } from '../../Api/context'
-import api from '../../Api'
-const Dashboard = () => {
-  const isAuth = useContext(AuthenticatedContext)
+import api from '../../common/api'
+const TransactionHistory = () => {
   const [transactionHistory, setTransactionHistory] = useState(null)
   const [lastPage, setLastPage] = useState(null)
   const navigate = useNavigate()
@@ -21,12 +19,7 @@ const Dashboard = () => {
   }
 
   useEffect(() => {
-    if (!isAuth.isAuthenticated) {
-      navigate('/login')
-    }
-
     transHistory()
-    console.log(transactionHistory && transactionHistory.meta)
   }, [])
 
   const Pagination = () => {
@@ -36,7 +29,7 @@ const Dashboard = () => {
         <button
           key={i}
           onClick={() => transHistory(i)}
-          className='w-6 mx-1 text-white bg-blue-400 rounded-sm'
+          className='w-6 mx-1 text-white bg-blue-400 rounded-sm hover:opacity-80'
         >
           {i}
         </button>
@@ -81,4 +74,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default TransactionHistory

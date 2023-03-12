@@ -4,10 +4,10 @@ import { AiFillBank } from 'react-icons/ai'
 import { RxDashboard } from 'react-icons/rx'
 import { BiNotepad, BiTransfer } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
-import { AuthenticatedContext } from '../../Api/context'
+import { AuthenticatedContext } from '../../common/context'
 import { BiLogOut } from 'react-icons/bi'
 
-import api from '../../Api'
+import api from '../../common/api'
 const Sidebar = () => {
   const isAuth = useContext(AuthenticatedContext)
   const [open, setOpen] = useState(true)

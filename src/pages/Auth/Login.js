@@ -8,8 +8,8 @@ import {
   FormErrorMessage
 } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom'
-import api from '../../Api'
-import { AuthenticatedContext } from '../../Api/context'
+import api from '../../common/api'
+import { AuthenticatedContext } from '../../common/context'
 
 const initLoginForm = {
   email: '',
@@ -17,18 +17,12 @@ const initLoginForm = {
 }
 
 const Login = () => {
-  const isAuth = useContext(AuthenticatedContext)
-
   const [dataLogin, loginForm] = useState(initLoginForm)
   const [errors, setErrors] = useState(null)
   const [unauthorize, setUnauthorize] = useState(null)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (isAuth.isAuthenticated) {
-      navigate('/')
-    }
-  }, [])
+  useEffect(() => {}, [])
 
   const onChangeLoginForm = e =>
     loginForm(prevState => ({
@@ -57,56 +51,54 @@ const Login = () => {
   }
 
   return (
-    !isAuth.isAuthenticated && (
-      <div
-        className={`flex items-center justify-center w-full h-screen overflow-hidden`}
-      >
-        <div className='flex flex-col items-center justify-center border rounded-sm shadow-lg w-96 h-96'>
-          <div className='mb-10'>
-            <h1 className='text-3xl font-bold'>
-              <span> SALA</span>
-              <span className='text-blue-500'>RIUM </span>
-              <span className='text-blue-500'> EXAM </span>
-            </h1>
-          </div>
-          <span className='w-[80%] mx-auto rounded-sm text-lg font-serif text-center text-white bg-red-400'>
-            {unauthorize}
-          </span>
-
-          <div className='px-6 mx-auto mt-2 w-96'>
-            <FormControl isInvalid={errors && errors.email}>
-              <FormLabel> Email * </FormLabel>
-              <Input
-                type='text'
-                borderColor={'gray.300'}
-                name='email'
-                value={dataLogin.email}
-                onChange={onChangeLoginForm}
-              />
-              <FormErrorMessage>{errors && errors.email}</FormErrorMessage>
-            </FormControl>
-          </div>
-          <div className='px-6 mx-auto mt-2 w-96'>
-            <FormControl isInvalid={errors && errors.password}>
-              <FormLabel> Password * </FormLabel>
-              <Input
-                type='password'
-                borderColor={'gray.300'}
-                name='password'
-                value={dataLogin.password}
-                onChange={onChangeLoginForm}
-              />
-              <FormErrorMessage>{errors && errors.password}</FormErrorMessage>
-            </FormControl>
-          </div>
-          <Stack direction='row' spacing={4} align='center' className='mt-4'>
-            <Button colorScheme='blue' variant='solid' onClick={onLoginHandler}>
-              Login
-            </Button>
-          </Stack>
+    <div
+      className={`flex items-center justify-center w-full h-screen overflow-hidden`}
+    >
+      <div className='flex flex-col items-center justify-center border rounded-sm shadow-lg w-96 h-96'>
+        <div className='mb-10'>
+          <h1 className='text-3xl font-bold'>
+            <span> SALA</span>
+            <span className='text-blue-500'>RIUM </span>
+            <span className='text-blue-500'> EXAM </span>
+          </h1>
         </div>
+        <span className='w-[80%] mx-auto rounded-sm text-lg font-serif text-center text-white bg-red-400'>
+          {unauthorize}
+        </span>
+
+        <div className='px-6 mx-auto mt-2 w-96'>
+          <FormControl isInvalid={errors && errors.email}>
+            <FormLabel> Email * </FormLabel>
+            <Input
+              type='text'
+              borderColor={'gray.300'}
+              name='email'
+              value={dataLogin.email}
+              onChange={onChangeLoginForm}
+            />
+            <FormErrorMessage>{errors && errors.email}</FormErrorMessage>
+          </FormControl>
+        </div>
+        <div className='px-6 mx-auto mt-2 w-96'>
+          <FormControl isInvalid={errors && errors.password}>
+            <FormLabel> Password * </FormLabel>
+            <Input
+              type='password'
+              borderColor={'gray.300'}
+              name='password'
+              value={dataLogin.password}
+              onChange={onChangeLoginForm}
+            />
+            <FormErrorMessage>{errors && errors.password}</FormErrorMessage>
+          </FormControl>
+        </div>
+        <Stack direction='row' spacing={4} align='center' className='mt-4'>
+          <Button colorScheme='blue' variant='solid' onClick={onLoginHandler}>
+            Login
+          </Button>
+        </Stack>
       </div>
-    )
+    </div>
   )
 }
 export default Login
